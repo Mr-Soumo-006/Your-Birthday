@@ -1,0 +1,370 @@
+.city {
+  position: absolute;
+  top: 0;                
+  width: 2000%;
+  height:2000%;
+  z-index: 1;
+  pointer-events: none;
+  will-change: transform;
+}
+
+
+.city.far {
+  background: linear-gradient(#1a1a1a, #2a2a2a);
+  animation: driftSlow 60s linear infinite;
+  opacity: 0.6;
+}
+
+
+.city.near {
+  background: repeating-linear-gradient(
+    90deg,
+    #555 0 40px,
+    #111 40px 80px
+  );
+  animation: driftFast 18s linear infinite;
+  opacity: 0.95;
+}
+
+@keyframes driftSlow {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-40%); }
+}
+
+@keyframes driftFast {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+
+.type {
+  min-height: 3em;
+  letter-spacing: 0.03em;
+  white-space: pre-line;
+}
+
+
+
+.character {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-60%) scale(0.95);
+  max-height: 75vh;
+  opacity: 0;
+  filter: drop-shadow(0 0 30px rgba(0,0,0,0.9));
+  animation: characterReveal 2.5s ease forwards;
+  z-index: 4;
+}
+
+@keyframes characterReveal {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+
+
+.taxi {
+  position: absolute;
+  bottom: 22%;
+  left: 12%;
+  max-width: 280px;
+  z-index: 3;
+  animation:
+    taxiMove 8s ease-in-out forwards,
+    taxiBob 1.6s ease-in-out infinite;
+}
+
+@keyframes taxiMove {
+  to { left: 40%; }
+}
+
+@keyframes taxiBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+.house {
+  position: absolute;
+  bottom: 38%;
+  right: 8%;
+  max-width: 320px;
+  opacity: 0;
+  z-index: 2;
+  animation: houseReveal 8s ease forwards;
+}
+
+@keyframes houseReveal {
+  to { opacity: 1; }
+}
+
+
+.gift-container {
+  position: absolute;
+  left: 62%;
+  top: 82%;        
+  transform: translateX(-50%);
+  z-index: 20;
+}
+.gift-container::after {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+
+.gift {
+  max-width: 220px;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.gift:hover {
+  transform: scale(1.05);
+}
+
+.gift.opening {
+  transform: scale(1.15);
+  opacity: 0;
+}
+.gift,
+.gift-open {
+  width: 220px;
+  cursor: pointer;
+  display: block;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.gift-open {
+  max-width: 260px;
+  opacity: 0;
+  animation: openReveal 1s ease forwards;
+}
+.hidden {
+  display: none !important;
+}
+.gift:active {
+  transform: scale(0.95);
+}
+
+@keyframes openReveal {
+  to { opacity: 1; }
+}
+
+
+.final-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+  z-index: 7;
+  top:45%;
+  left:18%;
+}
+
+.final-content.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+#final {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+#final h2 {
+  order: -2;
+  margin-bottom: 6px;        
+  transform: translateY(-12px);
+  text-align: center;
+  font-size: 35px;
+  text-shadow: 0 0 12px rgba(235, 133, 206, 0.97);
+}
+
+
+#final p {
+  order: -1;
+  margin-bottom: 10px;
+  transform: translateY(-10px); 
+  text-align: center;
+   font-size: 30px;
+   text-shadow: 0 0 12px rgba(249, 180, 242, 0.987);
+}
+
+
+
+
+
+.dark {
+  background: #000;
+}
+
+
+.dark::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.97);
+  pointer-events: none;
+  z-index: 40;
+}
+
+
+.dark.light::before {
+  background:
+    radial-gradient(
+      circle at var(--tx, 50%) var(--ty, 50%),
+      rgba(255,255,255,0.08) 0px,
+      transparent 120px,
+      rgba(0,0,0,0.97) 260px
+    );
+}
+
+.dark .scene-center {
+  position: relative;
+  z-index: 60;
+  top: 50%;
+}
+
+
+.character {
+  z-index: 10;
+  pointer-events: none;
+  top: 2%;
+}
+
+
+.option {
+  z-index: 10;
+}
+
+.option button {
+  opacity: 0.9;
+}
+
+
+.taxi-text {
+  transform: translateY(-80px); 
+  color: white;
+  
+  
+  font-size: 2rem;
+  text-shadow: 0 0 12px rgba(249, 180, 242, 0.987);
+}
+
+
+
+
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+button.reveal {
+  transition-delay: 0.3s;
+}
+
+
+
+
+
+@media (max-width: 600px) {
+
+  .scene-center {
+    padding: 0 16px;
+  }
+
+  .taxi-text {
+    font-size: 1.4rem;
+    transform: translateY(-40px);
+    text-shadow: 0 0 10px rgb(21, 0, 255);
+  }
+
+  .reveal {
+    transform: translateY(30px);
+  }
+
+  .reveal.show {
+    transition: opacity 1.4s ease, transform 1.4s ease;
+  }
+
+  #final h2 {
+    font-size: 26px;
+  }
+
+  #final p {
+    font-size: 20px;
+  }
+
+  .scene-center p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    text-shadow: 0 0 10px rgba(0, 0, 255, 0.9);
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 14px 24px;
+  }
+}
+
+
+@media (min-width: 601px) and (max-width: 1024px) {
+
+  .taxi-text {
+    font-size: 1.7rem;
+    transform: translateY(-60px);
+  }
+
+  .scene-center p {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    text-shadow: 0 0 10px rgba(38, 0, 255, 0.85);
+  }
+
+  .reveal.show {
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+
+  #final h2 {
+    font-size: 30px;
+  }
+
+  #final p {
+    font-size: 24px;
+  }
+}
+
+
+@media (min-width: 1025px) {
+
+  .scene-center p {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    text-shadow: 0 0 10px rgba(18, 1, 255, 0.8);
+  }
+
+  .reveal.show {
+    transition: opacity 1s ease, transform 1s ease;
+  }
+
+  button {
+    font-size: 1.1rem;
+  }
+}
+
