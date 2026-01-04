@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Taxi</title>
+
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/scenes.css">
+  <link rel="stylesheet" href="../css/effects.css">
+  <style>
+  .scene::after {
+    display: none !important;
+  }
+</style>
+
+</head>
+
+<body class="scene taxi">
+
+
+  <div class="city far"></div>
+  <div class="city near"></div>
+
+  
+  <img src="../assets/images/taxi.jpg" class="taxi" alt="Taxi">
+
+
+<div class="scene-center taxi-text">
+  <p id="text" class="type"></p>
+</div>
+
+
+<div class="house-full" id="houseFull"></div>
+
+
+<script type="module">
+  import { typeText,initTextSound, playMusic, playTextSound  } from "../js/engine.js";
+ 
+
+  initTextSound("../assets/sounds/text.mp3");
+  playMusic("../assets/sounds/ambient.mp3");
+
+  const lines = [
+    "The city drifts by.",
+    "College thoughts fade.",
+    "The night feels slow.",
+    "The taxi comes to a stop.",
+    "Your destination has arrived."
+  ];
+
+  const el = document.getElementById("text");
+  const houseFull = document.getElementById("houseFull");
+
+  (async () => {
+    for (const line of lines) {
+      await typeText(el, line, 40);
+      await new Promise(r => setTimeout(r, 1400));
+    }
+
+   
+    houseFull.classList.add("show");
+
+  
+    setTimeout(() => {
+      houseFull.classList.remove("show");
+    }, 2000);
+
+
+    setTimeout(() => {
+      window.location.href = "arrival.html";
+
+    }, 2400);
+  })();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>An Evening</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/effects.css">
+
+  <link rel="stylesheet" href="../css/scenes.css">
+</head>
+<body class="scene">
+
+
+  <div class="bg bg-intro"></div>
+
+  <div class="scene-center">
+  <div class="dk">
+    <h1>Ankita</h1>
+    <p class="reveal">The day slowly comes to an end.</p>
+
+    <button type="button" class="reveal" id="btn" onclick="location.href='taxi.html'">
+      Continue
+    </button>
+  </div>
+</div>
+ <script type="module">
+  import { initTextSound, playMusic, playTextSound } from "../js/engine.js";
+  initTextSound("../assets/sounds/text.mp3");
+  playMusic("../assets/sounds/ambient.mp3");
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const reveals = document.querySelectorAll(".reveal");
+
+    reveals.forEach((el, i) => {
+      setTimeout(() => {
+        el.classList.add("show");
+        playTextSound();
+      }, i * 800);
+    });
+  });
+</script>
+</body>
+</html>

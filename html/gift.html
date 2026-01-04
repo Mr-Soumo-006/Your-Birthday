@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gift</title>
+
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/scenes.css">
+  <link rel="stylesheet" href="../css/effects.css">
+
+  <style>
+    .scene::after { display: none !important; }
+  </style>
+</head>
+
+<body class="scene">
+
+
+  <div class="bg bg-bedroom"></div>
+
+
+<div class="gift-container" id="giftClosedBox">
+  <img
+    src="../assets/images/gift-closed.png"
+    class="gift"
+    id="giftClosed"
+    alt="Gift"
+  >
+</div>
+
+<div class="gift-container hidden" id="giftOpenBox">
+  <img
+    src="../assets/images/gift-open.png"
+    class="gift-open"
+    alt="Open Gift"
+  >
+</div>
+
+
+
+<div class="scene-center final-content" id="final">
+  <a href="video.html">
+    <img
+      src="../assets/images/final.png"
+      style="max-width:300px; cursor:pointer;"
+      alt="Final"
+    >
+  </a>
+
+  <h2 class="reveal">Happy Birthday Ankita 🎉</h2>
+<p class="reveal">This moment was made just for you 💙</p>
+
+</div>
+
+
+
+ <script type="module">
+  import { initTextSound, playMusic, playTextSound } from "../js/engine.js";
+  initTextSound("../assets/sounds/text.mp3");
+  playMusic("../assets/sounds/.mp3");
+  const giftClosedBox = document.getElementById("giftClosedBox");
+  const giftOpenBox   = document.getElementById("giftOpenBox");
+  const finalContent  = document.getElementById("final");
+
+  giftClosedBox.addEventListener("click", () => {
+    giftClosedBox.style.opacity = "0";
+
+    setTimeout(() => {
+      giftClosedBox.classList.add("hidden");
+      giftOpenBox.classList.remove("hidden");
+
+      setTimeout(() => {
+        finalContent.classList.add("show");
+
+        
+        const reveals = finalContent.querySelectorAll(".reveal");
+        reveals.forEach((el, i) => {
+          setTimeout(() => {
+            el.classList.add("show");
+          }, i * 800);
+        });
+
+      }, 600);
+    }, 400);
+  });
+</script>
+
+
+
+
+
+</body>
+</html>

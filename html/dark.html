@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dark House</title>
+
+
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/scenes.css">
+  <link rel="stylesheet" href="../css/effects.css">
+</head>
+
+<body class="scene dark">
+
+  
+  <div class="bg bg-house"></div>
+
+ <div class="scene-center">
+  <p class="reveal">
+    A sudden power cut, huh?<br>
+    Darkness surrounds everywhere.
+  </p>
+
+  <button id="torchBtn" class="reveal" style="color:blue;">
+    Turn ON torch
+  </button>
+</div>
+
+
+<script type="module">
+  window.addEventListener("DOMContentLoaded", () => {
+    const reveals = document.querySelectorAll(".reveal");
+
+    reveals.forEach((el, i) => {
+      setTimeout(() => {
+        el.classList.add("show");
+      }, i * 900);
+    });
+  });
+  const btn = document.getElementById("torchBtn");
+  const body = document.body;
+  const ui = document.querySelector(".scene-center");
+
+  btn.addEventListener("click", () => {
+    body.classList.add("light");
+
+    ui.style.opacity = "0";
+
+    document.addEventListener("mousemove", (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+
+      body.style.setProperty("--tx", x + "%");
+      body.style.setProperty("--ty", y + "%");
+    });
+
+  
+    setTimeout(() => {
+      location.href = "figure.html";
+    }, 3000);
+  });
+    import { initTextSound,playMusic, playTextSound } from "../js/engine.js";
+
+
+  playMusic("../assets/sounds/dark.mp3", 0.35);
+  initTextSound("../assets/sounds/text.mp3");
+</script>
+
+
+</body>
+
+</html>

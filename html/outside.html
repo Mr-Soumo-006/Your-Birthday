@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Outside</title>
+
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/scenes.css">
+  <link rel="stylesheet" href="../css/effects.css">
+</head>
+
+<body class="scene">
+
+
+  <div class="bg bg-house"></div>
+
+  <div class="scene-center">
+    <p class="reveal">
+  The house stands still.<br>
+  Not a single light inside.
+</p>
+
+<button class="reveal" onclick="location.href='dark.html'">
+  Ring the bell
+</button>
+
+
+    
+  </div>
+<script type="module">
+  import { initTextSound, playMusic, playTextSound } from "../js/engine.js";
+  initTextSound("../assets/sounds/text.mp3");
+  playMusic("../assets/sounds/ambient.mp3");
+window.addEventListener("DOMContentLoaded", () => {
+    const reveals = document.querySelectorAll(".reveal");
+
+    reveals.forEach((el, i) => {
+      setTimeout(() => {
+        el.classList.add("show");
+      }, i * 900);
+    });
+  });
+  </script>
+</body>
+
+</html>
